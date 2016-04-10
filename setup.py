@@ -1,6 +1,7 @@
 import os
 from pip.req import parse_requirements
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
 
 
 def read(fname):
@@ -10,20 +11,24 @@ def read(fname):
 req_path = os.path.join(os.path.dirname(__file__), 'requirements.txt')
 install_reqs = parse_requirements(req_path, session=False)
 
+req_path = os.path.join(os.path.dirname(__file__), 'test-requirements.txt')
+test_reqs = parse_requirements(req_path, session=False)
+
 reqs = [str(ir.req) for ir in install_reqs]
+treqs = [str(ir.req) for ir in test_reqs]
 
 
 setup(
-    name = 'pydice',
-    version ='0.1.0',
-    author ='Justin Hammond',
-    author_email ='justin@roaet.com',
-    description ='python RPG Dice Parser and utilities',
-    url ='https://github.com/roaet/pydice',
-    packages = find_packages(),
-    long_description =read('README.md'),
-    install_requires=reqs,
-    entry_points = {
+    name='pydice',
+    version='0.1.0',
+    author='Justin Hammond',
+    author_email='justin@roaet.com',
+    description='python RPG Dice Parser and calculator',
+    url='https://github.com/roaet/pydice',
+    packages=find_packages(),
+    long_description=read('README.md'),
+    install_requires=reqs + treqs,
+    entry_points={
         'console_scripts': [
             'pydice = pydice.client:main'
         ],
