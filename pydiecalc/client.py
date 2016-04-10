@@ -2,8 +2,8 @@ import cmd
 import os
 import sys
 
-from pydice import CaughtRollParsingError
-from pydice import roll
+from pydiecalc import CaughtRollParsingError
+from pydiecalc import roll
 
 
 def _perform_roll(line):
@@ -14,9 +14,9 @@ def _perform_roll(line):
         print("Bad roll format")
 
 
-class PyDND(cmd.Cmd):
+class PyDieCalc(cmd.Cmd):
 
-    prompt = 'pydice: '
+    prompt = 'pydiecalc: '
     variables = {}
 
     def do_roll(self, line):
@@ -43,7 +43,7 @@ def main():
         line = " ".join(sys.argv[1:])
         _perform_roll(line)
         return
-    PyDND().cmdloop()
+    PyDieCalc().cmdloop()
 
 if __name__ == '__main__':
     main()

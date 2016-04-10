@@ -1,33 +1,33 @@
-#pydice
+#pydiecalc
 
 ##Installation
 
-`pip install pydice`
+`pip install pydiecalc`
 
 ##Usage
 
 ###As a CLI
 
-To run the pydice library as an interactive CLI you run the application
+To run the pydiecalc library as an interactive CLI you run the application
 without arguments:
 
-`pydice`
+`pydiecalc`
 
 ###From the Command Line
 
-To run the pydice library from the command line you run the application with
+To run the pydiecalc library from the command line you run the application with
 arguments that will be parsed:
 
-`pydice 1d6 + 10`
+`pydiecalc 1d6 + 10`
 
 ###As a library
 
-To use pydice as a library you need to import it and then handle the output:
+To use pydiecalc as a library you need to import it and then handle the output:
 
 ```
-import pydice
+import pydiecalc
 
-result, rolls = pydice.roll('1d6 + 10')
+result, rolls = pydiecalc.roll('1d6 + 10')
 ```
 
-`pydice.roll` will raise `CaughtRollParsingError` if the parsing fails.
+`pydiecalc.roll` will raise `CaughtRollParsingError` if the parsing fails.

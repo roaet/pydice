@@ -19,18 +19,18 @@ treqs = [str(ir.req) for ir in test_reqs]
 
 
 setup(
-    name='pydice',
+    name='pydiecalc',
     version='0.1.0',
     author='Justin Hammond',
     author_email='justin@roaet.com',
     description='python RPG Dice Parser and calculator',
-    url='https://github.com/roaet/pydice',
+    url='https://github.com/roaet/pydiecalc',
     packages=find_packages(),
     long_description=read('README.md'),
     install_requires=reqs + treqs,
     entry_points={
         'console_scripts': [
-            'pydice = pydice.client:main'
+            'pydiecalc = pydiecalc.client:main'
         ],
     }
 )

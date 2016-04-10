@@ -1,10 +1,10 @@
 import math
 import unittest2
 
-from pydice import CaughtRollParsingError
-from pydice import DEBUG_MAX
-from pydice import DEBUG_MIN
-from pydice import roll
+from pydiecalc import CaughtRollParsingError
+from pydiecalc import DEBUG_MAX
+from pydiecalc import DEBUG_MIN
+from pydiecalc import roll
 
 
 class TestPyDice(unittest2.TestCase):

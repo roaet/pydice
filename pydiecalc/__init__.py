@@ -147,7 +147,6 @@ def _do_roll(input_string, variables, debug):
         except ParseException as err:
             raise CaughtRollParsingError(err)
 
-
         # calculate result , store a copy in ans , display the result to user
         result = evaluateStack(exprStack, variables, roll_list, debug)
         variables['ans'] = result
