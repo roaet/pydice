@@ -6,4 +6,3 @@ unittest2
 coverage
 discover
 python-subunit
-oslotest

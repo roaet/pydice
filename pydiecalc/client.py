@@ -6,9 +6,9 @@ from pydiecalc import CaughtRollParsingError
 from pydiecalc import roll
 
 
-def _perform_roll(line):
+def _perform_roll(line, variables):
     try:
-        result, rolls = roll(line)
+        result, rolls = roll(line, variables)
         print(result)
     except CaughtRollParsingError:
         print("Bad roll format")
@@ -41,7 +41,7 @@ def main():
         exit(0)
     if len(sys.argv) > 1:
         line = " ".join(sys.argv[1:])
-        _perform_roll(line)
+        _perform_roll(line, {})
         return
     PyDieCalc().cmdloop()
 
