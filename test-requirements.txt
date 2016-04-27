@@ -1,6 +1,6 @@
 hacking
 
-flake8==2.2.4
+flake8
 nose
 unittest2
 coverage

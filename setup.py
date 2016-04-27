@@ -20,7 +20,7 @@ treqs = [str(ir.req) for ir in test_reqs]
 
 setup(
     name='pydiecalc',
-    version='0.1.2',
+    version='0.1.3',
     author='Justin Hammond',
     author_email='justin@roaet.com',
     description='python RPG Dice Parser and calculator',

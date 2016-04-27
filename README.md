@@ -1,5 +1,7 @@
 #pydiecalc
 
+[![Build Status](https://travis-ci.org/roaet/pydiecalc.svg?branch=master)](https://travis-ci.org/roaet/pydiecalc)
+
 ##Installation
 
 `pip install pydiecalc`
