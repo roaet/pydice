@@ -34,8 +34,10 @@ def _dice_grammar(exprStack, varStack):
     point = Literal('.')
     e = CaselessLiteral('E')
     plusorminus = Literal('+') | Literal('-')
+    singledie = Literal('d')
     number = Word(nums)
     integer = Combine(Optional(plusorminus) + number)
+    singleroll = Combine(singledie + number)
     floatnumber = Combine(
         integer + Optional(point + Optional(number)) + Optional(e + integer))
 
@@ -56,8 +58,8 @@ def _dice_grammar(exprStack, varStack):
 
     expr = Forward()
     atom = (
-        (e | floatnumber | integer | ident).setParseAction(pushFirst) |
-        (lpar + expr.suppress() + rpar))
+        (e | floatnumber | integer | ident | singleroll).setParseAction(
+            pushFirst) | (lpar + expr.suppress() + rpar))
     roll = Forward()
     roll << atom + ZeroOrMore((dieop + roll).setParseAction(pushFirst))
 
@@ -95,7 +97,7 @@ def evaluateStack(s, variables, roll_list, debug):
             sum += roll
         if key not in roll_list:
             roll_list[key] = []
-        roll_list[key].append(rolls)
+        roll_list[key] += rolls
         return sum
 
     # map operator symbols to corresponding arithmetic operations
@@ -116,11 +118,13 @@ def evaluateStack(s, variables, roll_list, debug):
         return math.pi
     elif op == "E":
         return math.e
+    elif re.search('^d[0-9]+$', op):
+        return int(_roll(1, int(op[1:])))
     elif re.search('^[a-zA-Z][a-zA-Z0-9_]*$', op):
         if op in variables:
             return variables[op]
         else:
-            return 0
+            raise CaughtRollParsingError("Could not find variable %s" % op)
     elif re.search('^[-+]?[0-9]+$', op):
         return int(op)
     else:
@@ -129,8 +133,11 @@ def evaluateStack(s, variables, roll_list, debug):
 
 class CaughtRollParsingError(Exception):
     def __init__(self, err):
-        message = "Parse failure\n%s\n%s\n%s" % (
-            err.line, " " * (err.column - 1) + "^", err)
+        if type(err) is ParseException:
+            message = "Parse failure\n%s\n%s\n%s" % (
+                err.line, " " * (err.column - 1) + "^", err)
+        else:
+            message = err
         super(CaughtRollParsingError, self).__init__(message)
 
 

@@ -16,6 +16,14 @@ class TestPyDice(unittest2.TestCase):
         result, rolls = roll('1d1')
         self.assertEqual(1, result)
 
+    def test_roll_single_one(self):
+        result, rolls = roll('d1')
+        self.assertEqual(1, result)
+
+    def test_roll_singular(self):
+        result, rolls = roll('d10', debug=DEBUG_MAX)
+        self.assertEqual(10, result)
+
     def test_assignment(self):
         result, rolls = roll('x = 2')
         self.assertEqual(2, result)
@@ -23,8 +31,8 @@ class TestPyDice(unittest2.TestCase):
         self.assertEqual(2, result)
 
     def test_unknown_variables(self):
-        result, rolls = roll('z')
-        self.assertEqual(0, result)
+        with self.assertRaises(CaughtRollParsingError):
+            result, rolls = roll('z')
 
     def test_floats(self):
         result, rolls = roll('1.1')

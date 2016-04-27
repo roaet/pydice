@@ -9,7 +9,8 @@ from pydiecalc import roll
 def _perform_roll(line, variables):
     try:
         result, rolls = roll(line, variables)
-        print(result)
+        resp = "%d = %s" % (int(result), rolls)
+        print(resp)
     except CaughtRollParsingError:
         print("Bad roll format")
 
@@ -29,6 +30,9 @@ class PyDieCalc(cmd.Cmd):
         return True
 
     def do_exit(self, line):
+        return True
+
+    def do_quit(self, line):
         return True
 
 
